@@ -1,3 +1,4 @@
+// change your project name in package json
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
