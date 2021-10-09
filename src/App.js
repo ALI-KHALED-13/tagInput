@@ -8,6 +8,7 @@ const App =()=>{
     const [savedTags, setSavedTags] = useState(['CSS']);
 
     const handleChange =(ev)=>{
+        if (ev.target.value === ' ') return; // to avoid storing /s
         if (!isFocused) setIsFocused(true);
         setTagInp(ev.target.value.toUpperCase());
     }
@@ -29,15 +30,20 @@ const App =()=>{
     }
     const addToBag =(ev)=>{
         if (!tagInp) return;
+
         if (!ev.code || (ev.code === 'Enter' || ev.code === 'Space')){
-            if (tagsChosen.indexOf(tagInp) >= 0) return setTagInp('');
+            const tagTxt = ev.target.className !== 'suggestion'? tagInp : ev.target.textContent;
+            if (tagsChosen.indexOf(tagTxt) >= 0) return setTagInp(''); //if already added
 
-            setSavedTags([...savedTags, tagInp]);
+            if (savedTags.indexOf(tagTxt) === -1) setSavedTags([...savedTags, tagTxt]);
 
-            setTagsChosen([...tagsChosen, tagInp]);
+            setTagsChosen([...tagsChosen, tagTxt]);
 
             setTagInp('');
         }
+    }
+    const removeFromBag =(ev)=> {
+        setTagsChosen(tagsChosen.filter(tag=> tag !== ev.target.previousElementSibling.textContent))
     }
     return (
         <main>
@@ -46,7 +52,9 @@ const App =()=>{
             <section>
                 <div id="tagsBag">
                     {tagsChosen.map((tag, ind)=> (
-                        <div className="tag" key={Date.now() + ind}>{tag} <span className="del">X</span></div>)
+                        <div className="tag" key={Date.now() + ind}>
+                            <p>{tag}</p> <span className="del" onClick={removeFromBag}>X</span>
+                        </div>)
                     )}
                 </div>
 
