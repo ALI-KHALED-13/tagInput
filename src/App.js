@@ -9,15 +9,16 @@ class App extends Component {
         this.saveTag = this.saveTag.bind(this);
     }
 
-    componentDidMount(){ // for users whome visited before 
-        if (localStorage.getItem('savedTags')){
-
-            const locallySavedTags = JSON.parse(localStorage.getItem('savedTags'));
-            this.setState({savedTags: locallySavedTags,});
-
-        } else {
+    componentDidMount(){
+        let locallySavedTags = localStorage.getItem('savedTags'); //null if not present
+        if (!locallySavedTags){
             localStorage.setItem('savedTags', JSON.stringify(this.state.savedTags));
+            locallySavedTags = localStorage.getItem('savedTags');
+
         }
+        locallySavedTags = JSON.parse(locallySavedTags);
+
+        this.setState({savedTags: locallySavedTags,});  
     }
 
     saveTag(tagTxt){
@@ -25,7 +26,7 @@ class App extends Component {
     }
 
     render(){
-        document.addEventListener( 'visibilitychange', ()=> localStorage.setItem('savedTags', JSON.stringify(this.state.savedTags))); // for future visits
+        document.addEventListener( 'visibilitychange', ()=>localStorage.setItem('savedTags', JSON.stringify(this.state.savedTags)));
 
         return (
             <main>

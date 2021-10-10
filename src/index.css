@@ -9,27 +9,72 @@ main {
     width: 50%;
     margin: 10% auto;
 }
-main > h2 {text-transform: uppercase;}
-main > p {font-style: italic;}
-
+main > h2 {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+main > p {
+    font-style: italic;
+    color: #606060;
+}
 main > section {
+    width: 60vw;
+}
+#tagsBag {
     background-color: #F5F5F5;
-    min-height: 30vh;
-    width: 100%;
+    min-height: 20vh;
+    border-radius: 2px;
+    padding: 3% 1%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    box-shadow: inset 2px 0x 0px #33A4FF;;
+    transition: box-shadow 0.3s;
 }
-main > section:focus-within {
-    background-color: #EBEBEB
+#tagsBag:hover {background-color: #EBEBEB;}
+#tagsBag:focus-within {
+    background-color: #EBEBEB;
+    box-shadow: inset 0px -2px 0px #33A4FF;
 }
-main > section > input {
+#tagsBag:not(:focus-within) .tag {
+    background-color: #EBF6FF;
+}
+
+#tagsBag > .tag {
+    padding: 2%;
+    background: #FFFFFF;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    margin: 1%;
+}
+.tag > * {margin: 0 8px}
+.tag > .del {
+    float: right;
+    height: 10px;
+}
+#tagsBag > input {
     background-color: inherit;
-    min-width: 75%;
-    width: 100%;
+    width: 60%;
     border: none;
     outline: none;
     padding: 2%;
+    margin: 1%;
 }
 #suggestions {
     width: 100%;
     background-color: inherit;
     border: none;
+}
+.suggestion {padding: 2% 3%;}
+.suggestion:hover {
+    cursor: pointer;
+    background-color: #EBF6FF;
+}
+.add {
+    cursor: pointer;
+    color: #33A4FF;
+    border: 1px solid #33A4FF;
+    font-size: 4vw;
+    padding: 10px 15px;
 }
