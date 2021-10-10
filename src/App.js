@@ -13,14 +13,11 @@ class App extends Component {
         if (localStorage.getItem('savedTags')){
 
             const locallySavedTags = JSON.parse(localStorage.getItem('savedTags'));
-            this.setState({saveTag: locallySavedTags,});
+            this.setState({savedTags: locallySavedTags,});
 
         } else {
             localStorage.setItem('savedTags', JSON.stringify(this.state.savedTags));
         }
-    }
-    componentWillUnmount(){ // for future visits
-        localStorage.setItem('savedTags', JSON.stringify(this.state.savedTags));
     }
 
     saveTag(tagTxt){
@@ -28,6 +25,8 @@ class App extends Component {
     }
 
     render(){
+        document.addEventListener( 'visibilitychange', ()=> localStorage.setItem('savedTags', JSON.stringify(this.state.savedTags))); // for future visits
+
         return (
             <main>
                 <h2>Tags</h2>
@@ -41,8 +40,8 @@ export default App;
 
 
 /* 
-could do the whole component in a functional way using only hooks (useEffect() to replace life cycle mehods above for example) 
-but leaned toward showing my abilities going both ways, to help you asses my skills
+could do the whole component in a functional way using only hooks (useEffect(()=>{}, []) to replace life cycle mehod above for example) 
+but leaned toward showing my abilities going both ways, to help the reviewer asses my skills
 Also, that local storage is an extra work (wasn't required in the test task details), however I've done it to mimic the mechanism of storintg into a database
 */
 

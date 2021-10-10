@@ -30,9 +30,11 @@ const TagInput =({savedTags, saveTag})=>{
     const removeFromBag =(ev)=> setTagsChosen(tagsChosen.filter(tag=> tag !== ev.target.previousElementSibling.textContent));
 
     const insertSuggestions =()=> { //custom hook next
-        const hints = savedTags.filter(tag=> tagInp && tag.startsWith(tagInp));
+        if (!tagInp) return;
+
+        const hints = savedTags.filter(tag=> tag.startsWith(tagInp));
         
-        if ( tagInp && !hints.length ) return <div className="add" onClick={addToBag}>+</div>;
+        if ( !hints.length ) return <div className="add" onClick={addToBag}>+</div>;
         
         return hints.map((tag, ind)=> (
               <div
