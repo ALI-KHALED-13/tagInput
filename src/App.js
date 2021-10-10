@@ -3,9 +3,8 @@ import { useState } from "react";
 const App =()=>{
     const [isFocused, setIsFocused] = useState(false);
     const [tagInp, setTagInp] = useState('');
-    const [tagsChosen, setTagsChosen] = useState([]);
-
     const [savedTags, setSavedTags] = useState(['CSS']);
+    const [tagsChosen, setTagsChosen] = useState([]);
 
     const handleChange =(ev)=>{
         if (ev.target.value === ' ') return; // to avoid storing /s
