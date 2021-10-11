@@ -15,8 +15,8 @@ const TagInput =({savedTags, saveTag})=>{
     
     const addToBag =(ev)=>{
         if (!tagInp) return;
-
-        if ( !ev.code || ev.code === 'Enter' || ev.code === 'Space' ){
+        
+        if ( !ev.key || ev.key === 'Enter' || ev.key === ' ' ){
             const tagTxt = ev.target.className !== 'suggestion'? tagInp : ev.target.textContent; //async setTagInp
             if (addedTags.indexOf(tagTxt) >= 0) return setTagInp(''); //if already added reset
 
@@ -40,9 +40,9 @@ const TagInput =({savedTags, saveTag})=>{
         
         if ( !hints.length ) return <button className="add" onClick={addToBag}>+</button>;
         
-        return hints.map((tag, ind)=> {
+        return <div id="suggestions"> {hints.map((tag, ind)=> {
           return <div className="suggestion" key={Date.now() + ind} onClick={addToBag}>{tag}</div>;
-        })
+        }) } </div>
     }
 
     return (
@@ -70,11 +70,9 @@ const TagInput =({savedTags, saveTag})=>{
                 />
             </div>
 
-            <div id="suggestions">
                 {
                     isFocused && insertSuggestions()
                 }
-            </div>
             
         </section>
     );
