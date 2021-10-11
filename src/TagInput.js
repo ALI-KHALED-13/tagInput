@@ -10,14 +10,15 @@ const TagInput =({savedTags, saveTag})=>{
         if (ev.target.value === ' ') return; // to avoid storing /s
         if (!isFocused) setIsFocused(true);
         
-        setTagInp(ev.target.value.trim().toUpperCase());
+        setTagInp(ev.target.value.toUpperCase());
     }
     
     const addToBag =(ev)=>{
         if (!tagInp) return;
-        
-        if ( !ev.key || ev.key === 'Enter' || ev.key === ' '){
-            const tagTxt = ev.target.className !== 'suggestion'? tagInp : ev.target.textContent; //async setTagInp
+        const isAndroidSpace = tagInp.charCodeAt(tagInp.length - 1) === 32; //for chrome on android
+
+        if ( !ev.key || ev.key === 'Enter' || ev.key === ' ' || isAndroidSpace){
+            const tagTxt = ev.target.className !== 'suggestion'? tagInp.trim() : ev.target.textContent; //async setTagInp
             if (addedTags.indexOf(tagTxt) >= 0) return setTagInp(''); //if already added reset
 
             saveTag(tagTxt);
