@@ -24,11 +24,14 @@ const TagInput =({savedTags, saveTag})=>{
 
             setAddedTags([...addedTags, tagTxt]);
 
-            setTagInp('');
+            return setTagInp('');
         }
+        
     }
 
-    const removeFromBag =(ev)=> setAddedTags(addedTags.filter(tag=> tag !== ev.target.previousElementSibling.textContent));
+    const removeFromBag =(ev)=> {
+        setAddedTags(addedTags.filter(tag=> tag !== ev.target.previousElementSibling.textContent));
+    }
 
     const insertSuggestions =()=> { 
         if (!tagInp) return;
@@ -37,7 +40,9 @@ const TagInput =({savedTags, saveTag})=>{
         
         if ( !hints.length ) return <button className="add" onClick={addToBag}>+</button>;
         
-        return hints.map((tag, ind)=> <div className="suggestion" key={Date.now() + ind} onClick={addToBag}> {tag} </div>);
+        return hints.map((tag, ind)=> {
+          return <div className="suggestion" key={Date.now() + ind} onClick={addToBag}>{tag}</div>;
+        })
     }
 
     return (
@@ -48,7 +53,8 @@ const TagInput =({savedTags, saveTag})=>{
                     addedTags.map((tag, ind)=> {
                         return (
                             <div className="tag" key={Date.now() + ind}>
-                                <p>{tag}</p> <img alt="remove" src={removeSign} className="del" onClick={removeFromBag} />
+                                <p>{tag}</p> 
+                                <img alt="del" src={removeSign} className="del" onClick={removeFromBag} />
                             </div>
                         )
                     })
@@ -58,6 +64,7 @@ const TagInput =({savedTags, saveTag})=>{
                     placeholder="Add Tags" 
                     onBlur={()=> setTimeout(()=>setIsFocused(false), 300)}
                     value={tagInp}
+                    onFocus={()=> setIsFocused(true)}
                     onChange={handleChange}
                     onKeyUp={addToBag}
                 />
