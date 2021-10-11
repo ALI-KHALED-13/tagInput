@@ -16,7 +16,7 @@ const TagInput =({savedTags, saveTag})=>{
     const addToBag =(ev)=>{
         if (!tagInp) return;
         
-        if ( !ev.key || ev.key === 'Enter' || (ev.key === ' ' || ev.keyCode === 229)){
+        if ( !ev.key || ev.key === 'Enter' || ev.key === ' '){
             const tagTxt = ev.target.className !== 'suggestion'? tagInp : ev.target.textContent; //async setTagInp
             if (addedTags.indexOf(tagTxt) >= 0) return setTagInp(''); //if already added reset
 
