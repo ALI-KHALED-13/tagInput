@@ -73,6 +73,8 @@ main > p {
     width: 100%;
     background-color: inherit;
     border: none;
+    border: 1px solid #EBEBEB;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.05);
 }
 .suggestion {padding: 2% 3%;}
 .suggestion:hover, .suggestion:focus {
