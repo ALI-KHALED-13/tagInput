@@ -33,7 +33,7 @@ main > p {
     min-height: 20vh;
     border-radius: 2px;
     padding: 2% 1%;
-    box-shadow: inset 2px 0x 0px #33A4FF;;
+    box-shadow: inset 2px 0x 0px #33A4FF;
     transition: box-shadow 0.3s;
 }
 #tagsBag:hover {background-color: #EBEBEB;}
