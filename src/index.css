@@ -55,7 +55,6 @@ main > p {
 }
 .tag > * {margin: 0 8px}
 .tag > .del {
-    float: right;
     height: 10px;
     cursor: pointer;
 }
